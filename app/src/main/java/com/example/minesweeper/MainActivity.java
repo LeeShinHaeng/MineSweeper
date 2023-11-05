@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        //토글 버튼 onclicklistener
+        //break 버튼 onclicklistener
         Button finish = (Button) findViewById(R.id.finsish_button);
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        //테스트용 button onclicklistener
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 final int finalI = i;
@@ -80,7 +80,8 @@ public class MainActivity extends AppCompatActivity {
                         int currentI = finalI;
                         int currentJ = finalJ;
 
-                        buttons[currentI][currentJ].toggleFlag();
+                        //buttons[currentI][currentJ].toggleFlag();
+                        buttons[currentI][currentJ].breakBlock();
 
                         //남은 지뢰 수 설정
                         TextView numOfFlag = (TextView) findViewById(R.id.nums_text);
