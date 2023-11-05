@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.PopupMenu;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -68,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
         //테스트용 blockbutton onclicklistener
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
@@ -80,9 +84,26 @@ public class MainActivity extends AppCompatActivity {
                         int currentI = finalI;
                         int currentJ = finalJ;
 
-                        //buttons[currentI][currentJ].toggleFlag();
-                        //buttons[currentI][currentJ].breakBlock();
-                        recursiveOpen(buttons, currentI, currentJ);
+                        PopupMenu popupMenu = new PopupMenu(MainActivity.this, buttons[currentI][currentJ]);
+                        MenuInflater menuInflater = getMenuInflater();
+                        menuInflater.inflate(R.menu.break_or_flag, popupMenu.getMenu());
+                        popupMenu.show();
+
+                        //popupMenu clicklistener
+                        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                            @Override
+                            public boolean onMenuItemClick(MenuItem menuItem) {
+                                if(menuItem.getItemId() == R.id.dig_menu){
+                                    recursiveOpen(buttons, currentI, currentJ);
+                                    return true;
+                                }
+                                else if(menuItem.getItemId() == R.id.flag_menu){
+                                    buttons[currentI][currentJ].toggleFlag();
+                                    return true;
+                                }
+                                return false;
+                            }
+                        });
 
                         //남은 지뢰 수 설정
                         TextView numOfFlag = (TextView) findViewById(R.id.nums_text);
@@ -92,7 +113,9 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-    
+
+
+
     //재귀적으로 열기
     void recursiveOpen(BlockButton[][] buttons, int x, int y) {
         if (x < 0 || y < 0
