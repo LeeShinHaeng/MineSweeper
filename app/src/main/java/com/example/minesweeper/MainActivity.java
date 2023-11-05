@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //테스트용 button onclicklistener
+        //테스트용 blockbutton onclicklistener
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 final int finalI = i;
@@ -81,7 +81,8 @@ public class MainActivity extends AppCompatActivity {
                         int currentJ = finalJ;
 
                         //buttons[currentI][currentJ].toggleFlag();
-                        buttons[currentI][currentJ].breakBlock();
+                        //buttons[currentI][currentJ].breakBlock();
+                        recursiveOpen(buttons, currentI, currentJ);
 
                         //남은 지뢰 수 설정
                         TextView numOfFlag = (TextView) findViewById(R.id.nums_text);
@@ -90,6 +91,29 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         }
+    }
+    
+    //재귀적으로 열기
+    void recursiveOpen(BlockButton[][] buttons, int x, int y) {
+        if (x < 0 || y < 0
+                || x >= rows || y >= columns
+                || !(buttons[x][y].isClickable())
+                || buttons[x][y].isFlag()) {
+            return;
+        }
+
+        buttons[x][y].breakBlock();
+
+        //주변에 블록이 없는 경우
+        if (buttons[x][y].getNeighborMines() == 0) {
+            // 주변 8방향 블록 오픈
+            for (int i = x - 1; i <= x + 1; i++) {
+                for (int j = y - 1; j <= y + 1; j++) {
+                    recursiveOpen(buttons, i, j);
+                }
+            }
+        }
+
     }
 
 

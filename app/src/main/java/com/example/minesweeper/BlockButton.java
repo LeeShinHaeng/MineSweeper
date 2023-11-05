@@ -2,6 +2,7 @@ package com.example.minesweeper;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 import android.widget.Button;
 
@@ -17,6 +18,7 @@ public class BlockButton extends Button {
         neighborMines = 0;
         mine = false;
         flag = false;
+        setTextColor(Color.BLUE);
     }
     public void toggleFlag(){
         if(!isFlag()){
@@ -39,6 +41,9 @@ public class BlockButton extends Button {
         }
         else{
             setText(neighborMines + "");
+            if(neighborMines == 0)
+                setText("");
+            setBackgroundColor(Color.WHITE);
             return false;
         }
     }
