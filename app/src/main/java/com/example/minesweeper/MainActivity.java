@@ -12,6 +12,7 @@ import android.widget.PopupMenu;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 public class MainActivity extends AppCompatActivity {
@@ -52,12 +53,6 @@ public class MainActivity extends AppCompatActivity {
                         1.0f);
 
                 buttons[i][j].setLayoutParams(layoutParams);
-                //주변 지뢰 수 보이게
-/*
-                buttons[i][j].setText(buttons[i][j].getNeighborMines() + "");
-                if(buttons[i][j].isMine())
-                    buttons[i][j].setText("!!");
-*/
                 tableRows[i].addView(buttons[i][j]);
             }
         }
@@ -72,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        //테스트용 blockbutton onclicklistener
+        //blockbutton onclicklistener
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 final int finalI = i;
@@ -112,6 +107,12 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         }
+
+        //게임 승리
+        if(blocks == 0){
+            Toast.makeText(this, "You Win!", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
 
@@ -175,5 +176,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return count;
     }
+
+
 
 }

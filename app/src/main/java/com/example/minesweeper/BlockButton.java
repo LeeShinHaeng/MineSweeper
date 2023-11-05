@@ -24,12 +24,12 @@ public class BlockButton extends Button {
         if(!isFlag()){
             setText("+");
             setFlag(true);
-            MainActivity.flags--;
+            //MainActivity.flags--;
         }
         else {
             setText("");
             setFlag(false);
-            MainActivity.flags++;
+            //MainActivity.flags++;
         }
     }
 
@@ -44,6 +44,7 @@ public class BlockButton extends Button {
             if(neighborMines == 0)
                 setText("");
             setBackgroundColor(Color.WHITE);
+            MainActivity.blocks--;
             return false;
         }
     }
