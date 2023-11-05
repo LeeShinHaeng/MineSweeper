@@ -2,6 +2,7 @@ package com.example.minesweeper;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.view.View;
 import android.widget.Button;
 
 @SuppressLint("AppCompatCustomView")
@@ -20,21 +21,26 @@ public class BlockButton extends Button {
     public void toggleFlag(){
         if(isFlag()){
             setFlag(false);
-            MainActivity.flags--;
+            MainActivity.flags++;
             setText("+");
         }
         else {
             setFlag(true);
-            MainActivity.flags++;
+            MainActivity.flags--;
             setText("");
         }
     }
 
     public boolean breakBlock(){
         setClickable(false);
-        if(isMine())
+        if(isMine()) {
+            setText("!!");
             return true;
-        else return false;
+        }
+        else{
+            setText(neighborMines + "");
+            return false;
+        }
     }
 
 
