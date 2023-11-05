@@ -112,130 +112,24 @@ public class MainActivity extends AppCompatActivity {
 
     // 주변 지뢰 숫자 카운팅
     void numberCounter(BlockButton[][] buttons) {
-        int k = 0;
-        //모서리와 인접하지 않은 경우
-        for(int x = 1; x < rows-1; x++){
-            for(int y = 1; y < columns-1; y++){
-                if(buttons[x-1][y-1].isMine())
-                    k++;
-                if(buttons[x-1][y].isMine())
-                    k++;
-                if(buttons[x-1][y+1].isMine())
-                    k++;
-                if(buttons[x][y-1].isMine())
-                    k++;
-                if(buttons[x][y+1].isMine())
-                    k++;
-                if(buttons[x+1][y-1].isMine())
-                    k++;
-                if(buttons[x+1][y].isMine())
-                    k++;
-                if(buttons[x+1][y+1].isMine())
-                    k++;
-
-                buttons[x][y].setNeighborMines(k);
-                k = 0;
+        for(int i = 0; i < rows; i++){
+            for(int j = 0 ; j < columns; j++){
+                buttons[i][j].setNeighborMines(countAdjacentMines(buttons, i, j));
             }
         }
-        
-        //위쪽 모서리와 인접한 블록
-        for(int y = 1; y < columns-1; y++){
-            k = 0;
-            if(buttons[0][y-1].isMine())
-                k++;
-            if(buttons[0][y+1].isMine())
-                k++;
-            if(buttons[1][y-1].isMine())
-                k++;
-            if(buttons[1][y].isMine())
-                k++;
-            if(buttons[1][y+1].isMine())
-                k++;
-            buttons[0][y].setNeighborMines(k);
-        }
-        //아래쪽 모서리와 인접한 블록
-        for(int y = 1; y < columns-1; y++){
-            k = 0;
-            if(buttons[8][y-1].isMine())
-                k++;
-            if(buttons[8][y+1].isMine())
-                k++;
-            if(buttons[7][y-1].isMine())
-                k++;
-            if(buttons[7][y].isMine())
-                k++;
-            if(buttons[7][y+1].isMine())
-                k++;
-            buttons[8][y].setNeighborMines(k);
-        }
-        //왼쪽 모서리와 인접한 블록
-        for(int x = 1; x < rows-1; x++){
-            k = 0;
-            if(buttons[x-1][0].isMine())
-                k++;
-            if(buttons[x+1][0].isMine())
-                k++;
-            if(buttons[x-1][1].isMine())
-                k++;
-            if(buttons[x][1].isMine())
-                k++;
-            if(buttons[x+1][1].isMine())
-                k++;
+    }
 
-            buttons[x][1].setNeighborMines(k);
-        }
-        //오른쪽 모서리와 인접한 블록
-        for(int x = 1; x < rows-1; x++){
-            k = 0;
-            if(buttons[x-1][8].isMine())
-                k++;
-            if(buttons[x+1][8].isMine())
-                k++;
-            if(buttons[x-1][7].isMine())
-                k++;
-            if(buttons[x][7].isMine())
-                k++;
-            if(buttons[x+1][7].isMine())
-                k++;
-            buttons[x][8].setNeighborMines(k);
-        }
+    int countAdjacentMines(BlockButton[][] buttons, int x, int y) {
+        int count = 0;
 
-        //좌상단
-        k = 0;
-        if(buttons[0][1].isMine())
-            k++;
-        if(buttons[1][0].isMine())
-            k++;
-        if(buttons[1][1].isMine())
-            k++;
-        buttons[0][0].setNeighborMines(k);
-        //우상단
-        k = 0;
-        if(buttons[0][7].isMine())
-            k++;
-        if(buttons[1][8].isMine())
-            k++;
-        if(buttons[1][7].isMine())
-            k++;
-        buttons[0][8].setNeighborMines(k);
-        //좌하단
-        k = 0;
-        if(buttons[7][0].isMine())
-            k++;
-        if(buttons[8][1].isMine())
-            k++;
-        if(buttons[8][0].isMine())
-            k++;
-        buttons[8][0].setNeighborMines(k);
-        //우하단
-        k = 0;
-        if(buttons[8][7].isMine())
-            k++;
-        if(buttons[7][8].isMine())
-            k++;
-        if(buttons[7][7].isMine())
-            k++;
-        buttons[8][8].setNeighborMines(k);
+        for (int i = Math.max(0, x - 1); i <= Math.min(x + 1, rows - 1); i++) {
+            for (int j = Math.max(0, y - 1); j <= Math.min(y + 1, columns - 1); j++) {
+                if (buttons[i][j].isMine() && (i != x || j != y)) {
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 
 }
