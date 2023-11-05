@@ -50,11 +50,11 @@ public class MainActivity extends AppCompatActivity {
 
                 buttons[i][j].setLayoutParams(layoutParams);
                 //주변 지뢰 수 보이게
-
+/*
                 buttons[i][j].setText(buttons[i][j].getNeighborMines() + "");
                 if(buttons[i][j].isMine())
                     buttons[i][j].setText("!!");
-
+*/
                 tableRows[i].addView(buttons[i][j]);
             }
         }
@@ -68,10 +68,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //남은 지뢰 수 설정
-        TextView numOfFlag = (TextView) findViewById(R.id.nums_text);
-        numOfFlag.setText(flags + "");
-
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
@@ -84,15 +80,15 @@ public class MainActivity extends AppCompatActivity {
                         int currentI = finalI;
                         int currentJ = finalJ;
 
-                        buttons[currentI][currentJ].breakBlock();
+                        buttons[currentI][currentJ].toggleFlag();
 
-
+                        //남은 지뢰 수 설정
+                        TextView numOfFlag = (TextView) findViewById(R.id.nums_text);
+                        numOfFlag.setText(flags + "");
                     }
                 });
             }
         }
-
-
     }
 
 

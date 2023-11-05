@@ -19,15 +19,15 @@ public class BlockButton extends Button {
         flag = false;
     }
     public void toggleFlag(){
-        if(isFlag()){
-            setFlag(false);
-            MainActivity.flags++;
+        if(!isFlag()){
             setText("+");
-        }
-        else {
             setFlag(true);
             MainActivity.flags--;
+        }
+        else {
             setText("");
+            setFlag(false);
+            MainActivity.flags++;
         }
     }
 
