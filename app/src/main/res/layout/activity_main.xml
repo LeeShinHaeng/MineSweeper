@@ -51,7 +51,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:text="10"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/mines_text"
         app:layout_constraintStart_toEndOf="@+id/mines_text"
@@ -77,10 +76,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="Break"
+        android:text="Exit (나가기)"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/blocks_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:text="Blocks : "
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/nums_block"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/blocks_text"
+        app:layout_constraintStart_toEndOf="@+id/blocks_text"
+        app:layout_constraintTop_toTopOf="@+id/blocks_text"
+        app:layout_constraintVertical_bias="1.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

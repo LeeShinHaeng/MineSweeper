@@ -4,10 +4,10 @@
 
     <item
         android:id="@+id/flag_menu"
-        android:title="Flag" />
+        android:title="Flag (표시)" />
     <item
         android:id="@+id/dig_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:title="Break" />
+        android:title="Break (열기)" />
 </menu>
