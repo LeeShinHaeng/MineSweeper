@@ -3,14 +3,12 @@ package com.example.minesweeper;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
-import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 @SuppressLint("AppCompatCustomView")
 public class BlockButton extends Button {
-    private int x = 0, y = 0, neighborMines = 0;
-    private boolean mine = false, flag = false;
+    private int x, y, neighborMines;
+    private boolean mine, flag;
 
     public BlockButton(Context context, int x, int y) {
         super(context);

@@ -2,7 +2,6 @@ package com.example.minesweeper;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -13,7 +12,6 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 public class MainActivity extends AppCompatActivity {
     static public int flags = 10;
@@ -28,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //table구성
-        TableLayout table = (TableLayout)findViewById(R.id.tableLayout);
+        TableLayout table = findViewById(R.id.tableLayout);
         TableRow[] tableRows = new TableRow[9];
         for(int i = 0; i < rows; i++) {
             tableRows[i] = new TableRow(this);
@@ -58,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //break 버튼 onclicklistener
-        Button finish = (Button) findViewById(R.id.finsish_button);
+        Button finish = findViewById(R.id.finsish_button);
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,11 +65,11 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //남은 지뢰 수
-        TextView numOfFlag = (TextView) findViewById(R.id.nums_text);
+        TextView numOfFlag = findViewById(R.id.nums_text);
         numOfFlag.setText(flags + "");
 
         //남은 블록 수
-        TextView numOfBlock = (TextView) findViewById(R.id.nums_block);
+        TextView numOfBlock = findViewById(R.id.nums_block);
         numOfBlock.setText(blocks + "");
 
         //blockbutton onclicklistener
@@ -83,10 +81,7 @@ public class MainActivity extends AppCompatActivity {
                 buttons[i][j].setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        int currentI = finalI;
-                        int currentJ = finalJ;
-
-                        PopupMenu popupMenu = new PopupMenu(MainActivity.this, buttons[currentI][currentJ]);
+                        PopupMenu popupMenu = new PopupMenu(MainActivity.this, buttons[finalI][finalJ]);
                         MenuInflater menuInflater = getMenuInflater();
                         menuInflater.inflate(R.menu.break_or_flag, popupMenu.getMenu());
                         popupMenu.show();
@@ -96,11 +91,11 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public boolean onMenuItemClick(MenuItem menuItem) {
                                 if(menuItem.getItemId() == R.id.dig_menu){
-                                    recursiveOpen(buttons, currentI, currentJ);
+                                    recursiveOpen(buttons, finalI, finalJ);
                                     return true;
                                 }
                                 else if(menuItem.getItemId() == R.id.flag_menu){
-                                    buttons[currentI][currentJ].toggleFlag();
+                                    buttons[finalI][finalJ].toggleFlag();
                                     return true;
                                 }
                                 return false;
@@ -115,15 +110,11 @@ public class MainActivity extends AppCompatActivity {
                             //게임 승리
                             Toast.makeText(MainActivity.this, "You Win", Toast.LENGTH_LONG).show();
                         }
-                    }
-                });
-            }
-        }
-
-
-
+                    }//End of onClick method
+                });//End of setOnClickListener
+            }//End of for J
+        }//End of for I
     }
-
 
 
     //재귀적으로 열기
@@ -150,13 +141,12 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
-
     }
 
 
     //지뢰 심기
     void minePlanter(BlockButton[][] buttons) {
-        int count = 0, x = 0, y = 0;
+        int count = 0, x, y;
         while(count < 10){
             x = (int) (Math.random() * rows);
             y = (int) (Math.random() * columns);
@@ -189,7 +179,4 @@ public class MainActivity extends AppCompatActivity {
         }
         return count;
     }
-
-
-
 }
