@@ -111,16 +111,16 @@ public class MainActivity extends AppCompatActivity {
                         numOfFlag.setText(flags + "");
                         numOfBlock.setText(blocks + "");
 
-
+                        if(blocks == 0){
+                            //게임 승리
+                            Toast.makeText(MainActivity.this, "You Win", Toast.LENGTH_LONG).show();
+                        }
                     }
                 });
             }
         }
 
-        //게임 승리
-        if(blocks == 0){
-            Toast.makeText(this, "You Win!", Toast.LENGTH_SHORT).show();
-        }
+
 
     }
 
@@ -135,7 +135,11 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        buttons[x][y].breakBlock();
+        boolean powOrNot = buttons[x][y].breakBlock();
+        if(powOrNot){
+            //게임 오버 창
+            Toast.makeText(this, "Game Over", Toast.LENGTH_SHORT).show();
+        }
 
         //주변에 블록이 없는 경우
         if (buttons[x][y].getNeighborMines() == 0) {
