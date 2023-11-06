@@ -2,6 +2,9 @@ package com.example.minesweeper;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -106,15 +109,78 @@ public class MainActivity extends AppCompatActivity {
                         numOfFlag.setText(flags + "");
                         numOfBlock.setText(blocks + "");
 
+                        //게임 승리
                         if(blocks == 0){
-                            //게임 승리
-                            Toast.makeText(MainActivity.this, "You Win", Toast.LENGTH_LONG).show();
+                            showWinDialog();
                         }
+
                     }//End of onClick method
                 });//End of setOnClickListener
             }//End of for J
         }//End of for I
     }
+
+    //승리시 AlertDialog
+    private void showWinDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Victory! (성공)");
+        builder.setMessage("Congratulations, You win the game.");
+
+        // 확인 버튼 추가 (원하는 경우)
+        builder.setPositiveButton("Finish", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        builder.setNegativeButton("Restart", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                restartGame(); //다시시작
+                dialog.dismiss(); // 다이얼로그 닫기
+            }
+        });
+
+        // AlertDialog 객체 생성 및 보여주기
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    //패배시 AlertDialog
+    private void showFailDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Pow! (실패)");
+        builder.setMessage("Watch Out! You Open the Mine");
+
+        // 확인 버튼 추가 (원하는 경우)
+        builder.setPositiveButton("Finish", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        builder.setNegativeButton("Restart", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                restartGame(); //다시시작
+                dialog.dismiss(); // 다이얼로그 닫기
+            }
+        });
+
+        // AlertDialog 객체 생성 및 보여주기
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+
+    private void restartGame() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // 현재 액티비티 위에 있는 모든 액티비티 제거
+        startActivity(intent);
+        finish(); // 현재 액티비티 종료
+    }
+
+
 
 
     //재귀적으로 열기
@@ -127,9 +193,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         boolean powOrNot = buttons[x][y].breakBlock();
+        //게임 오버
         if(powOrNot){
-            //게임 오버 창
-            Toast.makeText(this, "Game Over", Toast.LENGTH_SHORT).show();
+            showFailDialog();
         }
 
         //주변에 블록이 없는 경우
