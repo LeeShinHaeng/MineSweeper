@@ -63,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                flags = 10;
+                blocks = 71;
                 finish();
             }
         });
@@ -126,10 +128,11 @@ public class MainActivity extends AppCompatActivity {
         builder.setTitle("Victory! (성공)");
         builder.setMessage("Congratulations, You win the game.");
 
-        // 확인 버튼 추가 (원하는 경우)
         builder.setPositiveButton("Finish", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                flags = 10;
+                blocks = 71;
                 finish();
             }
         });
@@ -152,10 +155,11 @@ public class MainActivity extends AppCompatActivity {
         builder.setTitle("Pow! (실패)");
         builder.setMessage("Watch Out! You Open the Mine");
 
-        // 확인 버튼 추가 (원하는 경우)
         builder.setPositiveButton("Finish", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                flags = 10;
+                blocks = 71;
                 finish();
             }
         });
@@ -177,6 +181,8 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // 현재 액티비티 위에 있는 모든 액티비티 제거
         startActivity(intent);
+        flags = 10;
+        blocks = 71;
         finish(); // 현재 액티비티 종료
     }
 
