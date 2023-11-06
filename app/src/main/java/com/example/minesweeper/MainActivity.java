@@ -66,6 +66,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //남은 지뢰 수
+        TextView numOfFlag = (TextView) findViewById(R.id.nums_text);
+        numOfFlag.setText(flags + "");
+
+        //남은 블록 수
+        TextView numOfBlock = (TextView) findViewById(R.id.nums_block);
+        numOfBlock.setText(blocks + "");
 
         //blockbutton onclicklistener
         for (int i = 0; i < rows; i++) {
@@ -100,9 +107,11 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
 
-                        //남은 지뢰 수 설정
-                        TextView numOfFlag = (TextView) findViewById(R.id.nums_text);
+                        //남은 지뢰, 블록 수 설정
                         numOfFlag.setText(flags + "");
+                        numOfBlock.setText(blocks + "");
+
+
                     }
                 });
             }

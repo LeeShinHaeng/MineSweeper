@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 @SuppressLint("AppCompatCustomView")
 public class BlockButton extends Button {
@@ -20,18 +21,21 @@ public class BlockButton extends Button {
         flag = false;
         setTextColor(Color.BLUE);
     }
+
+
     public void toggleFlag(){
         if(!isFlag()){
             setText("+");
             setFlag(true);
-            //MainActivity.flags--;
+            MainActivity.flags--;
         }
         else {
             setText("");
             setFlag(false);
-            //MainActivity.flags++;
+            MainActivity.flags++;
         }
     }
+
 
     public boolean breakBlock(){
         setClickable(false);
