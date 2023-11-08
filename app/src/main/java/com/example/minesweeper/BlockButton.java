@@ -3,6 +3,7 @@ package com.example.minesweeper;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.widget.Button;
 
 @SuppressLint("AppCompatCustomView")
@@ -17,7 +18,7 @@ public class BlockButton extends Button {
         neighborMines = 0;
         mine = false;
         flag = false;
-        setTextColor(Color.BLUE);
+        setTextColor(Color.RED);
     }
 
 
@@ -37,18 +38,22 @@ public class BlockButton extends Button {
 
     public boolean breakBlock(){
         setClickable(false);
-        if(isMine()) {
-            setText("!!");
-            return true;
-        }
-        else{
+        if(!isMine()) {
             setText(neighborMines + "");
+            setTypeface(null, Typeface.BOLD);
             if(neighborMines == 0)
                 setText("");
-            setBackgroundColor(Color.WHITE);
+            else if(neighborMines == 1)
+                setTextColor(Color.BLACK);
+            else if(neighborMines == 2)
+                setTextColor(Color.BLUE);
+            else if(neighborMines == 3)
+                setTextColor(Color.YELLOW);
+            setBackgroundColor(Color.LTGRAY);
             MainActivity.blocks--;
             return false;
         }
+        return true;
     }
 
 
