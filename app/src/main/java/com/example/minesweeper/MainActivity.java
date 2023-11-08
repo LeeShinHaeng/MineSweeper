@@ -112,14 +112,27 @@ public class MainActivity extends AppCompatActivity {
                         numOfBlock.setText(blocks + "");
 
                         //게임 승리
-                        if(blocks == 0){
+                        if(blocks == 0)
                             showWinDialog();
-                        }
+
 
                     }//End of onClick method
                 });//End of setOnClickListener
             }//End of for J
         }//End of for I
+
+        Button submit_button = findViewById(R.id.submit_button);
+        submit_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //게임 승리
+                if(blocks == 0)
+                    showWinDialog();
+
+                else
+                    showFailDialog();
+            }
+        });
     }
 
     //승리시 AlertDialog

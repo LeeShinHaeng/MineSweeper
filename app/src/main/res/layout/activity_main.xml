@@ -102,5 +102,14 @@
         app:layout_constraintTop_toTopOf="@+id/blocks_text"
         app:layout_constraintVertical_bias="1.0" />
 
+    <Button
+        android:id="@+id/submit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit (확인)"
+        app:layout_constraintBottom_toTopOf="@+id/finsish_button"
+        app:layout_constraintEnd_toEndOf="@+id/finsish_button"
+        app:layout_constraintStart_toStartOf="@+id/finsish_button" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
