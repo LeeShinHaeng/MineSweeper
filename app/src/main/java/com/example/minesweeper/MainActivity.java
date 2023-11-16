@@ -97,43 +97,28 @@ public class MainActivity extends AppCompatActivity {
                             public boolean onMenuItemClick(MenuItem menuItem) {
                                 if(menuItem.getItemId() == R.id.dig_menu){
                                     recursiveOpen(buttons, finalI, finalJ);
-                                    return true;
                                 }
                                 else if(menuItem.getItemId() == R.id.flag_menu){
                                     buttons[finalI][finalJ].toggleFlag();
-                                    return true;
                                 }
-                                return false;
-                            }
-                        });
-
-                        //남은 지뢰, 블록 수 설정
-                        numOfFlag.setText(flags + "");
-                        numOfBlock.setText(blocks + "");
-
-                        //게임 승리
-                        if(blocks == 0)
-                            showWinDialog();
 
 
+                                //남은 지뢰, 블록 수 설정
+                                numOfFlag.setText(flags + "");
+                                numOfBlock.setText(blocks + "");
+
+                                //게임 승리
+                                if(blocks == 0)
+                                    showWinDialog();
+
+                                return true;
+                            }//End of onMenuItemClick method
+                        });//End of popupMenu.setOnMenuItemClickListener
                     }//End of onClick method
                 });//End of setOnClickListener
             }//End of for J
         }//End of for I
-
-        Button submit_button = findViewById(R.id.submit_button);
-        submit_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //게임 승리
-                if(blocks == 0)
-                    showWinDialog();
-
-                else
-                    showFailDialog();
-            }
-        });
-    }
+    }//End of OnCreate
 
     //승리시 AlertDialog
     private void showWinDialog() {
