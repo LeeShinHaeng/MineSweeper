@@ -95,40 +95,27 @@ public class MainActivity extends AppCompatActivity {
         //blockbutton onclicklistener
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
-                final int finalI = i;
-                final int finalJ = j;
+                int globalI = i;
+                int globalJ = j;
 
                 buttons[i][j].setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        PopupMenu popupMenu = new PopupMenu(MainActivity.this, buttons[finalI][finalJ]);
-                        MenuInflater menuInflater = getMenuInflater();
-                        menuInflater.inflate(R.menu.break_or_flag, popupMenu.getMenu());
-                        popupMenu.show();
+                        if(!toggleButton.isChecked()){
+                            recursiveOpen(buttons, globalI, globalJ);
+                        }
+                        else if(toggleButton.isChecked()){
+                            buttons[globalI][globalJ].toggleFlag();
+                        }
 
-                        //popupMenu clicklistener
-                        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                            @Override
-                            public boolean onMenuItemClick(MenuItem menuItem) {
-                                if(menuItem.getItemId() == R.id.dig_menu){
-                                    recursiveOpen(buttons, finalI, finalJ);
-                                }
-                                else if(menuItem.getItemId() == R.id.flag_menu){
-                                    buttons[finalI][finalJ].toggleFlag();
-                                }
+                        //남은 지뢰, 블록 수 설정
+                        numOfFlag.setText(flags + "");
+                        numOfBlock.setText(blocks + "");
 
+                        //게임 승리
+                        if(blocks == 0)
+                            showWinDialog();
 
-                                //남은 지뢰, 블록 수 설정
-                                numOfFlag.setText(flags + "");
-                                numOfBlock.setText(blocks + "");
-
-                                //게임 승리
-                                if(blocks == 0)
-                                    showWinDialog();
-
-                                return true;
-                            }//End of onMenuItemClick method
-                        });//End of popupMenu.setOnMenuItemClickListener
                     }//End of onClick method
                 });//End of setOnClickListener
             }//End of for J
