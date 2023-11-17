@@ -6,16 +6,11 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.PopupMenu;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 public class MainActivity extends AppCompatActivity {
@@ -59,17 +54,6 @@ public class MainActivity extends AppCompatActivity {
                 tableRows[i].addView(buttons[i][j]);
             }
         }
-
-        //break 버튼 onclicklistener
-        Button finish = findViewById(R.id.finsish_button);
-        finish.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                flags = 10;
-                blocks = 71;
-                finish();
-            }
-        });
 
         //toggle 버튼 onclicklistener
         ToggleButton toggleButton = findViewById(R.id.toggleButton);
