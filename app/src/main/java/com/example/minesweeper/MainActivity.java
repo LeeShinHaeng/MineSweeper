@@ -10,11 +10,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.PopupMenu;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 public class MainActivity extends AppCompatActivity {
     static public int flags = 10;
@@ -66,6 +68,19 @@ public class MainActivity extends AppCompatActivity {
                 flags = 10;
                 blocks = 71;
                 finish();
+            }
+        });
+
+        //toggle 버튼 onclicklistener
+        ToggleButton toggleButton = findViewById(R.id.toggleButton);
+        toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    toggleButton.setText("Flag");
+                } else {
+                    toggleButton.setText("Break");
+                }
             }
         });
 
